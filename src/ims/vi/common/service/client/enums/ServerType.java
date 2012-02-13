@@ -26,7 +26,8 @@ public enum ServerType implements Serializable{
 	STBC_BINFO("STBC_BINFO"),
 	STBC_GETT("STBC_GETT"),
 	STBC_VERIFYT("STBC_VERIFYT"),
-	STBC_UNBIND("STBC_UNBIND")
+	STBC_UNBIND("STBC_UNBIND"),
+	BUY_THRU("BUY_THRU")
 	;
 	
 	private String type;

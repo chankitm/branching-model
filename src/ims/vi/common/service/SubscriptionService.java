@@ -52,6 +52,17 @@ public interface SubscriptionService {
 	StandardReturnMessage<List<ims.vi.common.service.client.Channel>> getSubscribedChannelList(final UniqueKey key,final String language);
 	
 	/**
+	 * Get a list of subscribed channels with all columns for a key
+	 * @param key
+	 * @param status subscription status  @see classname ims.vi.common.service.client.enums.SubscriptionStatus
+	 * @param language
+	 * @return
+	 * message response code:  ResponseCode.INVALID_INPUT, ResponseCode.INVALID_LANGUAGE
+	 * ResponseCode.OK, ResponseCode.INTERNAL_ERROR
+	 */
+	StandardReturnMessage<List<ims.vi.common.bean.Channel>> getSubscribedChannelListFull(final UniqueKey key, final SubscriptionStatus status, final String language);
+	
+	/**
 	 * Plan subscription
 	 * @param planCode the plan code to subscribe
 	 * @param fsa

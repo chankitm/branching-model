@@ -22,6 +22,7 @@ public interface MovieHouseCheckoutService {
 	public MovieHousePriceMessage getMovieHouseProductPrice(String refId, UniqueKey key, String productId);
 	public MovieHousePriceMessageWithCashPoint getMovieHouseProductPriceWithCashPoint(String refId, UniqueKey key, String productId);
 	public MovieHousePlayListMessage getMyCurrentPlayList(String refId, UniqueKey key, String language);
+	public MovieHousePlayListMessage getMyCurrentPlayListWithAdultFlag(String refId, UniqueKey key, String language, Boolean isAdult);
 	public MovieHousePlayListMessage existInMyCurrentPlayList(String refId, UniqueKey key, String productId);
 	public MovieHouseSdxMessage freeBandwidth(String refId, String deviceId, String deviceSid, String deviceIp, Long bitRate);
 	public EchoMessage echo(String refId, String echoMessage);
