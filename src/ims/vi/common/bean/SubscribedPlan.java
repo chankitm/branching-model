@@ -30,6 +30,46 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "SubscribedPlan", namespace = "http://www.pccw.com/")
 public class SubscribedPlan implements Serializable {
 	private static final long serialVersionUID = 1L;
+    public static final String ALLFIELDS = " sp.SUB_PLAN_ID AS SP_SUB_PLAN_ID," +
+    		"sp.LAST_REQUEST_ID AS SP_LAST_REQUEST_ID," +
+    		"sp.REGISTERED_DATE AS SP_REGISTERED_DATE," +
+    		"sp.REGISTERED_BY AS SP_REGISTERED_BY," +
+    		"sp.SERVICE_STARTED_DATE AS SP_SERVICE_STARTED_DATE," +
+    		"sp.SERVICE_STARTED_BY AS SP_SERVICE_STARTED_BY," +
+    		"sp.SUSPENDED_DATE AS SP_SUSPENDED_DATE," +
+    		"sp.SUSPENDED_BY AS SP_SUSPENDED_BY," +
+    		"sp.SUSPEND_LEVEL AS SP_SUSPEND_LEVEL," +
+    		"sp.RESUMED_DATE AS SP_RESUMED_DATE," +
+    		"sp.RESUMED_BY AS SP_RESUMED_BY," +
+    		"sp.TERMINATED_DATE AS SP_TERMINATED_DATE," +
+    		"sp.TERMINATED_BY AS SP_TERMINATED_BY," +
+    		"sp.LAST_BILL_DATE AS SP_LAST_BILL_DATE," +
+    		"sp.NEXT_BILL_DATE AS SP_NEXT_BILL_DATE," +
+    		"sp.SCH_TERMINATION_DATE AS SP_SCH_TERMINATION_DATE," +
+    		"sp.EXPIRATION_DATE AS SP_EXPIRATION_DATE," +
+    		"sp.LAST_FAIL_DATE AS SP_LAST_FAIL_DATE," +
+    		"sp.SMS_ENTITLE_ID AS SP_SMS_ENTITLE_ID," +
+    		"sp.SMS_ENTITLE_START_TIME AS SP_SMS_ENTITLE_START_TIME," +
+    		"sp.SMS_ENTITLE_END_TIME AS SP_SMS_ENTITLE_END_TIME," +
+    		"sp.FAILURE_REASON AS SP_FAILURE_REASON," +
+    		"sp.MODIFIED_DATE AS SP_MODIFIED_DATE," +
+    		"sp.MODIFIED_BY AS SP_MODIFIED_BY," +
+    		"sp.CREATED_DATE AS SP_CREATED_DATE," +
+    		"sp.CREATED_BY AS SP_CREATED_BY," +
+    		"sp.LAST_RENTAL_START_DATE AS SP_LAST_RENTAL_START_DATE," +
+    		"sp.LAST_RENTAL_END_DATE AS SP_LAST_RENTAL_END_DATE," +
+    		"sp.CANNOT_UNSUB AS SP_CANNOT_UNSUB," +
+    		"sp.CANNOT_CHANGE_FROM AS SP_CANNOT_CHANGE_FROM," +
+    		"sp.INPUT_DATE AS SP_INPUT_DATE," +
+    		"sp.INPUT_BY AS SP_INPUT_BY," +
+    		"sp.REFERRER_ID AS SP_REFERRER_ID," +
+    		"sp.STAFF_ID AS SP_STAFF_ID," +
+    		"sp.LOCK_CHANNEL AS SP_LOCK_CHANNEL," +
+    		"sp.UNLOCK_CHANNEL AS SP_UNLOCK_CHANNEL," +
+    		"sp.FSA AS SP_FSA," +
+    		"sp.STATUS AS SP_STATUS," +
+    		"sp.PLAN_CODE AS SP_PLAN_CODE ";
+    
 	@Id
 	@Column(name = "SUB_PLAN_ID", nullable = false)
 	private BigDecimal subPlanId;

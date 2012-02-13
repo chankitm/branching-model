@@ -112,4 +112,9 @@ public interface CommonProfileService {
 	
 	StandardReturnMessage<Boolean> updateProfile(
 			final Profile profile);
+	
+	StandardReturnMessage<Boolean> setAdultContentReceivable(
+			final Profile profile,
+			final String modifiedBy,
+			final boolean receiveAdultContent);
 }

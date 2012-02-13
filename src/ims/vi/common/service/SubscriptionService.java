@@ -8,6 +8,7 @@ import ims.vi.common.persistence.ResultCount;
 import ims.vi.common.service.client.ActionResult;
 import ims.vi.common.service.client.ChannelAvailablePlans;
 import ims.vi.common.service.client.StandardReturnMessage;
+import ims.vi.common.service.client.SubscribedPlanWithMktSchDisplay;
 import ims.vi.common.service.client.UniqueKey;
 import ims.vi.common.service.client.VodCheckLibSubResult;
 import ims.vi.common.service.client.VodLibraryServiceType;
@@ -73,6 +74,8 @@ public interface SubscriptionService {
 	 */
 	public StandardReturnMessage<ActionResult> subscribePlan(String planCode,UniqueKey key,String campaignName);
 	
+	public StandardReturnMessage<ActionResult> subscribePlanWebSelf(String planCode,UniqueKey key,String campaignName);
+	
 	public StandardReturnMessage<ActionResult> subscribePlan(String planCode,UniqueKey key,String campaignName,
 			String csrId, String inStaffId, String salesChannel, String other, String sourceCode,
 			String salesmanCode, String customerType, String inReferrerId, String remarks,
@@ -100,7 +103,8 @@ public interface SubscriptionService {
 	 * message response code: ResponseCode.INVALID_INPUT, ResponseCode.OK,
 	 * ResponseCode.INTERNAL_ERROR
 	 */
-	StandardReturnMessage<List<SubscribedPlan>> getSubscribedPlanList(final ResultCount resultCount,final UniqueKey key,final SubscriptionStatus status);	
+	StandardReturnMessage<List<SubscribedPlan>> getSubscribedPlanList(final ResultCount resultCount,final UniqueKey key,final SubscriptionStatus status);
+	StandardReturnMessage<List<SubscribedPlanWithMktSchDisplay>> getSubscribedPlanListWithDisplayCode(final ResultCount resultInfo,final UniqueKey key,final SubscriptionStatus status);
 
 	/**
 	 * Get a list of subscribed plans using a unique key,status name and service indicator
