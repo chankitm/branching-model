@@ -109,4 +109,7 @@ public interface CommonProfileService {
 	 */
 	StandardReturnMessage<Boolean> isValidProfile(
 			final UniqueKey key);
+	
+	StandardReturnMessage<Boolean> updateProfile(
+			final Profile profile);
 }

@@ -73,6 +73,13 @@ public interface SubscriptionService {
 	 */
 	public StandardReturnMessage<ActionResult> subscribePlan(String planCode,UniqueKey key,String campaignName);
 	
+	public StandardReturnMessage<ActionResult> subscribePlanWebSelf(String planCode,UniqueKey key,String campaignName);
+	
+	public StandardReturnMessage<ActionResult> subscribePlan(String planCode,UniqueKey key,String campaignName,
+			String csrId, String inStaffId, String salesChannel, String other, String sourceCode,
+			String salesmanCode, String customerType, String inReferrerId, String remarks,
+			List<String> topUpOfferList);
+	
 	/**
 	 * Plan termination
 	 * @param planCode

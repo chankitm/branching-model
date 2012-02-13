@@ -294,6 +294,39 @@ public class Profile implements Serializable {
     @Column(name="NEXT_NUM_EYE2")
     private BigInteger nextNumEye2;
     
+    @Column(name="NUM_VSTB")
+    private BigInteger numVstb;
+    
+    @Column(name="NEXT_NUM_VSTB")
+    private BigInteger nextNumVstb;
+    
+    @Column(name="EYE2_DEFAULT_MODE")
+    private String eye2DefaultMode;
+    
+    @Column(name="EYE2_MODE")
+    private String eye2Mode;
+    
+    @Column(name="VSTB_TYPE")
+    private String vstbType;
+    
+    @Column(name="NEXT_VSTB_TYPE")
+    private String nextVstbType;
+    
+    @Column(name="SERVICE_STATUS")
+    private String serviceStatus;
+    
+    @Column(name="NOSS_LINE_TYPE")
+    private String nossLineType;
+    
+    @Column(name="NOSS_LINE_RATE")
+    private String nossLineRate;
+    
+    @Column(name="NOSS_LINE_RATE_RESET")
+    private String nossLineRateReset;
+    
+    @Column(name="CUSTOMER_TYPE")
+    private String customerType;
+    
     public BigInteger getNumStb() {
 		return numStb;
 	}
@@ -1070,7 +1103,95 @@ public class Profile implements Serializable {
 		this.status = status;
 	}
     
-    @Override
+	public BigInteger getNumVstb() {
+		return numVstb;
+	}
+
+	public void setNumVstb(BigInteger numVstb) {
+		this.numVstb = numVstb;
+	}
+
+	public BigInteger getNextNumVstb() {
+		return nextNumVstb;
+	}
+
+	public void setNextNumVstb(BigInteger nextNumVstb) {
+		this.nextNumVstb = nextNumVstb;
+	}
+
+	public String getEye2DefaultMode() {
+		return eye2DefaultMode;
+	}
+
+	public void setEye2DefaultMode(String eye2DefaultMode) {
+		this.eye2DefaultMode = eye2DefaultMode;
+	}
+
+	public String getEye2Mode() {
+		return eye2Mode;
+	}
+
+	public void setEye2Mode(String eye2Mode) {
+		this.eye2Mode = eye2Mode;
+	}
+
+	public String getVstbType() {
+		return vstbType;
+	}
+
+	public void setVstbType(String vstbType) {
+		this.vstbType = vstbType;
+	}
+
+	public String getNextVstbType() {
+		return nextVstbType;
+	}
+
+	public void setNextVstbType(String nextVstbType) {
+		this.nextVstbType = nextVstbType;
+	}
+
+	public String getServiceStatus() {
+		return serviceStatus;
+	}
+
+	public void setServiceStatus(String serviceStatus) {
+		this.serviceStatus = serviceStatus;
+	}
+
+	public String getNossLineType() {
+		return nossLineType;
+	}
+
+	public void setNossLineType(String nossLineType) {
+		this.nossLineType = nossLineType;
+	}
+
+	public String getNossLineRate() {
+		return nossLineRate;
+	}
+
+	public void setNossLineRate(String nossLineRate) {
+		this.nossLineRate = nossLineRate;
+	}
+
+	public String getNossLineRateReset() {
+		return nossLineRateReset;
+	}
+
+	public void setNossLineRateReset(String nossLineRateReset) {
+		this.nossLineRateReset = nossLineRateReset;
+	}
+	
+	public String getCustomerType() {
+		return customerType;
+	}
+	
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
+	}
+	
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (fsa != null ? fsa.hashCode() : 0);
