@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="QuadPlayAPIClient" default="pack">
+	<target name="init" description="work and  properties configuration">
+		<property name="client-project.dir" value="." />
+		<property name="client-project-bin.dir" value="${client-project.dir}/bin" />
+		<property name="client-project-src.dir" value="${client-project.dir}/src" />
+		<property name="client-project-lib.dir" value="${client-project.dir}/lib" />
+		<property name="client-project-dist.dir" value="${client-project.dir}/dist" />
+		<property name="client-project-meta-inf-src.dir" value="${client-project-src.dir}/META-INF" />
+		<property name="client-project-meta-inf-bin.dir" value="${client-project-bin.dir}/META-INF" />
+		<property name="jboss.dir" value="D:/JBoss4.2.2-API" />
+		<property name="jboss.client.dir" value="${jboss.dir}/client" />
+		<property name="testapi-lib.dir" value="../TestAPI/lib" />
+
+		<path id="master-classpath">
+			<fileset dir="${client-project-lib.dir}" includes="**/*.jar" />
+			<fileset dir="${jboss.client.dir}" includes="**/*.jar" />
+		</path>
+	</target>
+
+	<target name="clean" depends="init" description="clean the outpur folders">
+		<delete dir="${client-project-bin.dir}"/>
+	</target>
+
+	<target name="compile" depends="clean" description="compile the source files">
+		<mkdir dir="${client-project-bin.dir}"/>
+		<mkdir dir="${client-project-meta-inf-bin.dir}"/>
+
+		<javac srcdir="${client-project-src.dir}" destdir="${client-project-bin.dir}" classpathref="master-classpath"/>
+	</target>
+
+	<target name="pack" depends="compile" description="make .jar file">
+		<mkdir dir="${client-project-dist.dir}" />
+
+		<copy todir="${client-project-meta-inf-bin.dir}">
+			<fileset dir="${client-project-meta-inf-src.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<jar destfile="${client-project-dist.dir}\${ant.project.name}.jar" basedir="${client-project-bin.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+		
+		<copy todir="${testapi-lib.dir}">
+			<fileset dir="${client-project-dist.dir}">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+	</target>
+</project>
