@@ -3,7 +3,6 @@ package ims.vi.common.service;
 import java.util.List;
 
 import ims.vi.common.service.client.ChannelRenewal;
-import ims.vi.common.service.client.ChannelRenewalForWeb;
 import ims.vi.common.service.client.StandardReturnMessage;
 import ims.vi.common.service.client.UniqueKey;
 /**
@@ -80,8 +79,6 @@ public interface ChannelService {
 	 * ResponseCode.OK, ResponseCode.INTERNAL_ERROR
 	 */
 	StandardReturnMessage<List<ChannelRenewal>> getChannelRenewal(final UniqueKey key,final String language);
-	
-	StandardReturnMessage<List<ChannelRenewalForWeb>> getChannelRenewal(final UniqueKey key);
 	
 	
 	StandardReturnMessage<List<String>> getNPVRLibraryIDByChannel(Integer channelID);
