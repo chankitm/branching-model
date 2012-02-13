@@ -2,17 +2,16 @@ package ims.vi.common.service.client;
 
 public class VerifyTokenRequest extends APIRequest{
 	private String token;
-	private String service;
+
 	
 	public VerifyTokenRequest(){
 	}
-
-	public VerifyTokenRequest(String callerID, String callerReferenceNo,
-			String version, String token, String service) {
+	
+	public VerifyTokenRequest(String callerID, String callerReferenceNo, String version, String token) {
 		super(callerID, callerReferenceNo, version);
 		this.token = token;
-		this.service = service;
 	}
+	
 
 	public String getToken(){
 		return token;
@@ -20,32 +19,24 @@ public class VerifyTokenRequest extends APIRequest{
 	public void setToken(String token){
 		this.token = token;
 	}
-	public String getService() {
-		return service;
-	}
-	public void setService(String service) {
-		this.service = service;
-	}
+
 
 	public Class getResponseClass(){
 		return VerifyTokenResponse.class;
 	}
 	@Override
 	public String toString(){
-		return String.format("%s, token: %s, service: %s", 
+		return String.format("%s, token: %s", 
 				super.toString(), 
-				getToken()!=null?getToken():"",
-				service==null?"":service);
+				getToken()!=null?getToken():"");
 	}
 	
 	public String toString(String serviceName){
 		return String.format("%1$s\n" +
-							 "[%2$s-in: %3$s] token: %4$s\n"+
-							 "[%2$s-in: %3$s] service: %5$s\n"
+							 "[%2$s-in: %3$s] token: %4$s\n"
 							 , super.toString(serviceName)
 							 , serviceName
 							 , getCallerReferenceNo()
-							 , getToken()!=null?getToken():""
-							 , getService()!=null?getService():"");
+							 , getToken()!=null?getToken():"");
 	}
 }
