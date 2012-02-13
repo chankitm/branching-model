@@ -5,12 +5,7 @@ public class TopUpCashPointRequest extends APIRequest {
 	private String cashPointBalance;
 	private String remarks;
 	private CashPointTopUpPlan cashPointTopUpPlan;
-	
-	/*private String presentedPrice;
-	private String topUpCashPoint;
-	private String validityPeriod;
-	private String offerCode;
-	*/
+	private String source;
 	
 	public TopUpCashPointRequest(){
 		
@@ -22,10 +17,6 @@ public class TopUpCashPointRequest extends APIRequest {
 		this.cashPointBalance = cashPointBalance;
 		this.cashPointTopUpPlan = cashPointTopUpPlan;
 		this.remarks = remarks;
-		/*this.presentedPrice = presentedPrice;
-		this.topUpCashPoint = topUpCashPoint;
-		this.validityPeriod = validityPeriod;
-		this.offerCode = offerCode;*/
 	}
 	
 	public UniqueKey getKey() {
@@ -36,14 +27,6 @@ public class TopUpCashPointRequest extends APIRequest {
 		this.key = key;
 	}
 
-	/*public String getPresentedPrice() {
-		return presentedPrice;
-	}
-
-	public void setPresentedPrice(String presentedPrice) {
-		this.presentedPrice = presentedPrice;
-	}*/
-
 	public String getCashPointBalance() {
 		return cashPointBalance;
 	}
@@ -51,30 +34,6 @@ public class TopUpCashPointRequest extends APIRequest {
 	public void setCashPointBalance(String cashPointBalance) {
 		this.cashPointBalance = cashPointBalance;
 	}
-
-	/*public String getTopUpCashPoint() {
-		return topUpCashPoint;
-	}
-
-	public void setTopUpCashPoint(String topUpCashPoint) {
-		this.topUpCashPoint = topUpCashPoint;
-	}
-
-	public String getValidityPeriod() {
-		return validityPeriod;
-	}
-
-	public void setValidityPeriod(String validityPeriod) {
-		this.validityPeriod = validityPeriod;
-	}
-
-	public String getOfferCode() {
-		return offerCode;
-	}
-
-	public void setOfferCode(String offerCode) {
-		this.offerCode = offerCode;
-	}*/
 
 	public String getRemarks() {
 		return remarks;
@@ -92,11 +51,19 @@ public class TopUpCashPointRequest extends APIRequest {
 		this.cashPointTopUpPlan = cashPointTopUpPlan;
 	}
 
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+	
 	@Override
 	public String toString(){
-		return String.format("%s, %s: %s, Price: %s, CashPointBalance: %s, CashPoint: %s, ExpiryMonth: %s, OfferCode: %s, Remarks: %s"
+		return String.format("%s, %s: %s, Price: %s, CashPointBalance: %s, CashPoint: %s, ExpiryMonth: %s, OfferCode: %s, Remarks: %s, Source: %s"
 				, super.toString(), getKey()!=null?getKey().getClass().getSimpleName():"Key", getKey()!=null?getKey().getValue():null, getCashPointTopUpPlan().getPrice()
-				, getCashPointBalance(), getCashPointTopUpPlan().getCashPoint(), getCashPointTopUpPlan().getExpiryMonth(), getCashPointTopUpPlan().getOfferCode(), getRemarks());
+				, getCashPointBalance(), getCashPointTopUpPlan().getCashPoint(), getCashPointTopUpPlan().getExpiryMonth(), getCashPointTopUpPlan().getOfferCode(), getRemarks(), getSource());
 	}
 	
 	public String toString(String serviceName){
@@ -107,14 +74,14 @@ public class TopUpCashPointRequest extends APIRequest {
 							 "[%2$s-in: %3$s] CashPoint: %8$s\n" +
 							 "[%2$s-in: %3$s] ExpiryMonth: %9$s\n" +
 							 "[%2$s-in: %3$s] OfferCode: %10$s\n" +
-							 "[%2$s-in: %3$s] Remarks: %11$s\n"
+							 "[%2$s-in: %3$s] Remarks: %11$s\n" +
+							 "[%2$s-in: %3$s] Source: %12$s\n"
 							 , super.toString(serviceName), serviceName, getCallerReferenceNo(), getKey()!=null?getKey().getClass().getSimpleName():"Key", getKey()!=null?getKey().getValue():null
-							 , getCashPointTopUpPlan().getPrice(), getCashPointBalance(), getCashPointTopUpPlan().getCashPoint(), getCashPointTopUpPlan().getExpiryMonth(), getCashPointTopUpPlan().getOfferCode(), getRemarks());
+							 , getCashPointTopUpPlan().getPrice(), getCashPointBalance(), getCashPointTopUpPlan().getCashPoint(), getCashPointTopUpPlan().getExpiryMonth(), getCashPointTopUpPlan().getOfferCode(), getRemarks(), getSource());
 	}
 	
 	@Override
 	public Class getResponseClass() {
 		return TopUpCashPointResponse.class;
 	}
-	
 }

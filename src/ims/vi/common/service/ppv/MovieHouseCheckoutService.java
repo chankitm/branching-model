@@ -1,5 +1,9 @@
 package ims.vi.common.service.ppv;
 
+import java.util.Date;
+import java.util.List;
+
+import ims.vi.common.service.client.CheckoutInfo;
 import ims.vi.common.service.client.UniqueKey;
 import ims.vi.common.service.client.message.EchoMessage;
 import ims.vi.common.service.client.message.MovieCheckoutMessage;
@@ -21,7 +25,10 @@ public interface MovieHouseCheckoutService {
 			Boolean isPlayOnly, Boolean purchaseOtherFormat, String deviceType, Boolean isLock, Boolean isAdult, Boolean isRestricted);
 	public MovieHousePriceMessage getMovieHouseProductPrice(String refId, UniqueKey key, String productId);
 	public MovieHousePriceMessageWithCashPoint getMovieHouseProductPriceWithCashPoint(String refId, UniqueKey key, String productId);
+	public MovieHousePriceMessageWithCashPoint getMovieHouseProductPriceWithCashPointForWeb(String refId, String productId);
+	public List<CheckoutInfo> checkoutForWeb(String inTxnId, String fsa, String clientId, String productId, String serviceType, String cpId, Double basicPrice, Double discountPrice, String cpType, Date txnDate, String deviceType, String purchaseType) throws Exception;
 	public MovieHousePlayListMessage getMyCurrentPlayList(String refId, UniqueKey key, String language);
+	public MovieHousePlayListMessage getMyCurrentPlayListForWeb(String refId, UniqueKey key, String language);
 	public MovieHousePlayListMessage getMyCurrentPlayListWithAdultFlag(String refId, UniqueKey key, String language, Boolean isAdult);
 	public MovieHousePlayListMessage existInMyCurrentPlayList(String refId, UniqueKey key, String productId);
 	public MovieHouseSdxMessage freeBandwidth(String refId, String deviceId, String deviceSid, String deviceIp, Long bitRate);

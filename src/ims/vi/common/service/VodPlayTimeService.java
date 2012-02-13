@@ -46,6 +46,11 @@ public interface VodPlayTimeService {
 			String system,
 			String remarks);
 	
+	public StandardReturnMessage<String> createVodExtTransaction(
+			String txnId,
+			String clientId,
+			String system);
+	
 	public StandardReturnMessage<ActionResult> createVodStatistic(
 			String stbId,
 			String stbsId,

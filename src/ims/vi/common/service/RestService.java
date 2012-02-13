@@ -1,6 +1,7 @@
 package ims.vi.common.service;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ezmorph.object.DateMorpher;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.EnumMorpher;
 import net.sf.json.util.JSONUtils;
@@ -29,6 +32,7 @@ import ims.vi.common.service.client.BSN;
 import ims.vi.common.service.client.BindingInfo;
 import ims.vi.common.service.client.CashPointTopUpPlan;
 import ims.vi.common.service.client.FSA;
+import ims.vi.common.service.client.NowIDBindingInfo;
 import ims.vi.common.service.client.STBINFO;
 import ims.vi.common.service.client.GetCurrentBindingInfoResponse;
 import ims.vi.common.service.client.enums.MovieHouseResponseCode;
@@ -120,30 +124,103 @@ public class RestService {
 		Map<String, Class> classMap = new HashMap<String, Class>();
 		classMap.put("topUpPlans", CashPointTopUpPlan.class);
 		classMap.put("bindingInfo", BindingInfo.class);
-		APIResponse jsonResponseObj = (APIResponse) JSONObject.toBean(JSONObject.fromObject(jsonResponse), request.getResponseClass(), classMap);
 		
-		//temp bug fix, for JSON in JSON
-		if("class ims.vi.common.service.client.GetCurrentBindingInfoResponse".contentEquals(jsonResponseObj.getClass().toString())){
-			jsonResponseObj = trim((GetCurrentBindingInfoResponse) jsonResponseObj);
+		APIResponse jsonResponseObj = null;
+		if("class ims.vi.common.service.client.GetCurrentBindingInfoRequest".contentEquals(request.getClass().toString())){
+			jsonResponseObj = constructBindingResponse(jsonResponse);
+		}else{
+			jsonResponseObj = (APIResponse) JSONObject.toBean(JSONObject.fromObject(jsonResponse), request.getResponseClass(), classMap);
 		}
 		
 		logger.info(String.format("[%s: %s] End:\n%s", serviceName, request.getCallerReferenceNo(), jsonResponseObj.toString(serviceName)));
 		return jsonResponseObj;
 	}
 	
-	private static GetCurrentBindingInfoResponse trim(GetCurrentBindingInfoResponse res){
-		if(res == null) return null;
-		List<BindingInfo> list = res.getBindingInfo();
-		if(list == null) return res;
-		if(list.get(0)==null) return res;
-		
-		for(BindingInfo info:list){
-			String lastChar = info.getExtInfo().substring(info.getExtInfo().length()-1, info.getExtInfo().length());
-			if(" ".contentEquals(lastChar)){
-				info.setExtInfo(info.getExtInfo().substring(0, info.getExtInfo().length()-1));
+	/**
+	 * JSON parser intended for the APIRequest: GetCurrentBindingInfoRequest.<br>
+	 * An alternate APIResponse creation method apart from JSONObject.toBean
+	 * @param jsontxt
+	 * @return GetCurrentBindingInfoResponse object
+	 */
+    private static GetCurrentBindingInfoResponse constructBindingResponse(String jsontxt){
+    	if(jsontxt == null || jsontxt.length() <= 0) return null;
+
+    	JSONObject json = (JSONObject) JSONSerializer.toJSON( jsontxt ); 
+        if(json == null || json.isEmpty() || json.isNullObject()) return null;
+        
+        String callerReferenceNo = json.getString("callerReferenceNo");
+        long elapsedTime = json.getLong("elapsedTime");
+        RestServerResponseCode responseCode = RestServerResponseCode.valueOf(json.getString("responseCode")==null?"INTERNAL_ERROR":json.getString("responseCode"));
+        String serverReferenceNo = json.getString("serverReferenceNo");
+        
+        //FSA
+        String FSA = (json.has("fsa")?json.getString("fsa"):null);
+        
+        //binding info
+        List<BindingInfo> lbi = null;
+        if(json.has("bindingInfo")){
+	        JSONArray bindingInfoArray = json.getJSONArray("bindingInfo");
+	        if(bindingInfoArray!=null && !bindingInfoArray.isEmpty()){
+	        	lbi = new ArrayList<BindingInfo>();
+				for (int i = 0; i < bindingInfoArray.size(); i++) {
+					JSONObject bindingInfoJSONObject = bindingInfoArray.getJSONObject(i);
+					BindingInfo bi = null;
+					if(bindingInfoJSONObject!=null && !bindingInfoJSONObject.isEmpty()){
+						bi = new BindingInfo();
+						String bindingType = bindingInfoJSONObject.getString("bindingType");
+						String stbid = bindingInfoJSONObject.getString("stbid");
+						String stbip = bindingInfoJSONObject.getString("stbip");
+						String deviceID = bindingInfoJSONObject.getString("deviceID");
+						String extInfo = bindingInfoJSONObject.getString("extInfo");
+						String fsa = bindingInfoJSONObject.getString("fsa");
+						String lastBindDate = bindingInfoJSONObject.getString("lastBindDate");
+			   
+				        bi.setBindingType(bindingType==null?"":bindingType);
+				        bi.setDeviceID(deviceID==null?"":deviceID);
+				        bi.setExtInfo(extInfo==null?"":extInfo);
+				        bi.setFsa(fsa==null?"":fsa);
+				        bi.setLastBindDate(lastBindDate==null?"":lastBindDate);
+				        bi.setStbid(stbid==null?"":stbid);
+				        bi.setStbip(stbip==null?"":stbip);
+				        
+				        lbi.add(bi);  
+					}
+				}
+	        }
+        }
+        
+		//nowid binding
+		NowIDBindingInfo nbi = null;
+		if(json.has("nowIdBindingInfo")){
+			JSONObject nowidJSONObject = json.getJSONObject("nowIdBindingInfo");
+			if(nowidJSONObject!=null && !nowidJSONObject.isEmpty()){
+				nbi = new NowIDBindingInfo();
+				String bindingType = nowidJSONObject.getString("bindingType");
+				String npid = nowidJSONObject.getString("npid");
+				String bind_date = nowidJSONObject.getString("bind_date");
+				String nowid_verified = nowidJSONObject.getString("nowid_verified");
+				String mem_status = nowidJSONObject.getString("mem_status");
+				String nowid = nowidJSONObject.getString("nowid");
+				String start_date = nowidJSONObject.getString("start_date");
+		 
+		        nbi.setBind_date(bind_date==null?"":bind_date);
+		        nbi.setBindingType(bindingType==null?"":bindingType);
+		        nbi.setMem_status(mem_status==null?"":mem_status);
+		        nbi.setNowid(nowid==null?"":nowid);
+		        nbi.setNowid_verified(nowid_verified==null?"":nowid_verified);
+		        nbi.setNpid(npid==null?"":npid);
+		        nbi.setStart_date(start_date==null?"":start_date);
 			}
 		}
-		
-		return res;
-	}
+		GetCurrentBindingInfoResponse res = new GetCurrentBindingInfoResponse(
+											responseCode,
+											callerReferenceNo==null?"":callerReferenceNo,
+											serverReferenceNo==null?"":serverReferenceNo,
+											elapsedTime,
+											lbi,
+											nbi,
+											FSA
+											);
+        return res;
+    }
 }

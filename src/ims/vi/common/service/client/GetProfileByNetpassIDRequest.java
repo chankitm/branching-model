@@ -30,7 +30,7 @@ public class GetProfileByNetpassIDRequest extends APIRequest{
 	
 	public String toString(String serviceName){
 		return String.format("%1$s\n" +
-							 "[%2$s-in: %3$s] NetpassID: %s\n"
+							 "[%2$s-in: %3$s] NetpassID: %4$s\n"
 							 , super.toString(serviceName)
 							 , serviceName
 							 , getCallerReferenceNo()

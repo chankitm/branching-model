@@ -106,7 +106,12 @@ public enum ResponseCode implements Serializable{
 	MSP_INVALID_EYE_NUMBER("Invalid eye number"),
 	MSP_NETVIGAOT_WRONG_INITIAL("Netvigator wrong initial"),
 	MSP_INVALID_MOBILE("Invalid mobile"),
-	MSP_INVALID_CONTACT_NUMBER("Invalid contact number")
+	MSP_INVALID_CONTACT_NUMBER("Invalid contact number"),
+	/**
+	 * For MovieHouse2B
+	 */
+	FSA_STALED("the fsa in the hash is also unbinded to the logined npid"),
+	EXTERNAL_CALL_ERROR("RET/REST/VODCMS returns error.")
 	;
 	
 	private String errorCode;

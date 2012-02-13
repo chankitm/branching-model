@@ -7,16 +7,19 @@ import ims.vi.common.service.client.enums.*;
 public class GetCurrentBindingInfoResponse extends APIResponse{
 	private List<BindingInfo> bindingInfo;
 	private NowIDBindingInfo nowIdBindingInfo;
+	private String fsa;
+	
 	public static final String SERVERTYPE = ServerType.STBC_BINFO.getType();
 
 	public GetCurrentBindingInfoResponse(){
 		
 	}
 	
-	public GetCurrentBindingInfoResponse(RestServerResponseCode responseCode, String callerReferenceNo, String serverReferenceNo, long elapsedTime, List<BindingInfo> bindingInfo, NowIDBindingInfo nowIdBindingInfo){
+	public GetCurrentBindingInfoResponse(RestServerResponseCode responseCode, String callerReferenceNo, String serverReferenceNo, long elapsedTime, List<BindingInfo> bindingInfo, NowIDBindingInfo nowIdBindingInfo, String fsa){
 		super(responseCode, callerReferenceNo, serverReferenceNo, elapsedTime);
 		this.bindingInfo = bindingInfo;
 		this.nowIdBindingInfo = nowIdBindingInfo;
+		this.fsa = fsa;
 	}
 
 	public List<BindingInfo> getBindingInfo() {
@@ -35,9 +38,18 @@ public class GetCurrentBindingInfoResponse extends APIResponse{
 		this.nowIdBindingInfo = nowIdBindingInfo;
 	}
 	
+	public String getFsa() {
+		return fsa;
+	}
+
+	public void setFsa(String fsa) {
+		this.fsa = fsa;
+	}
+	
 	@Override
 	public String toString(){
 		String log = String.format("%s", super.toString());
+		log += String.format(", fsa: %s",fsa);
 		if(bindingInfo != null){
 			for (BindingInfo info : bindingInfo){
 				if(info!=null){
@@ -67,6 +79,7 @@ public class GetCurrentBindingInfoResponse extends APIResponse{
 	
 	public String toString(String serviceName){
 		String log = String.format("%s\n", super.toString());
+		log += String.format("fsa: %s\n",fsa);
 		if(bindingInfo != null){
 			for (BindingInfo info : bindingInfo){
 				if(info!=null){
@@ -99,5 +112,4 @@ public class GetCurrentBindingInfoResponse extends APIResponse{
 		}
 		return log;					
 	}
-
 }

@@ -1,6 +1,7 @@
 package ims.vi.vodcommon.service.client.enums;
 
 public enum ResponseCode {
+	FSA_STALED("FSA_STALED"),
 	EXTERNAL_CALL_ERROR("EXTERNAL_CALL_ERROR"),
 	INVALID_PROFILE("INVALID_PROFILE"),
 	INVALID_SERVICETYPE("INVALID_SERVICETYPE"),

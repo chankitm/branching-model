@@ -19,6 +19,7 @@ public class MovieHousePlayItem implements Serializable {
 	private String language;
 	private String classification;
 	private String serviceType;
+	private String machineName;
 	private boolean isLock;
 	private boolean isRestricted;
 	private boolean isAdult;
@@ -29,7 +30,7 @@ public class MovieHousePlayItem implements Serializable {
 	public MovieHousePlayItem() {}
 	
 	public MovieHousePlayItem(String id, String productId, String title, String actors,
-			String duration, String language, String classification, String serviceType,
+			String duration, String language, String classification, String serviceType, String machineName,
 			boolean isLock, boolean isRestricted, boolean isAdult, Date systemTime,
 			Date expireTime) {
 		this.id = id;
@@ -39,6 +40,7 @@ public class MovieHousePlayItem implements Serializable {
 		this.duration = duration;
 		this.language = language;
 		this.serviceType = serviceType;
+		this.machineName = machineName;
 		this.classification = classification;
 		this.isLock = isLock;
 		this.isRestricted = isRestricted;
@@ -47,6 +49,14 @@ public class MovieHousePlayItem implements Serializable {
 		this.expireTime = expireTime;
 	}
 	
+	public String getMachineName() {
+		return machineName;
+	}
+
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+
 	public String getId() {
 		return id;
 	}
