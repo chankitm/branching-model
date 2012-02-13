@@ -37,7 +37,12 @@ public class GetPlanDetailRequest extends APIRequest{
 	@Override
 	public Class getResponseClass() {
 		// TODO Auto-generated method stub
-		return GetPlanDetailResponse.class;
+//		return GetPlanDetailResponse.class;
+		if(getVersion().contentEquals("1.0")){
+			return GetPlanDetailResponse.class;
+		}else if(getVersion().contentEquals("2.0")){
+			return GetPlanDetailv2Response.class;
+		}else return null;
 	}
 
 
