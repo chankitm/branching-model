@@ -31,13 +31,12 @@ public class GetCurrentBindingInfoResponse extends APIResponse{
 		if(bindingInfo != null){
 			for (BindingInfo info : bindingInfo){
 				if(info!=null){
-					log += String.format(", stbid: %s, stbip: %s, deviceID: %s, extInfo: %s, fsa: %s, lastBindDate: %s",
+					log += String.format(", stbid: %s, stbip: %s, deviceID: %s, extInfo %s, fsa %s",
 							(info.getStbid() == null)?"":info.getStbid(), 
 							(info.getStbip() == null)?"":info.getStbip(), 
 							(info.getDeviceID() == null)?"":info.getDeviceID(), 
 							(info.getExtInfo() == null)?"":info.getExtInfo(), 
-							(info.getFsa() == null)?"":info.getFsa(),
-							(info.getLastBindDate() == null)?"":info.getLastBindDate());
+							(info.getFsa() == null)?"":info.getFsa());
 				}
 			}
 		}
@@ -53,15 +52,13 @@ public class GetCurrentBindingInfoResponse extends APIResponse{
 										 "[%1$s-out: %2$s, %3$s] stbip: %5$s\n"+
 										 "[%1$s-out: %2$s, %3$s] deviceID: %6$s\n"+
 										 "[%1$s-out: %2$s, %3$s] extInfo: %7$s\n" +
-										 "[%1$s-out: %2$s, %3$s] fsa: %8$s\n"+
-										 "[%1$s-out: %2$s, %3$s] lastBindDate: %9$s\n"
+										 "[%1$s-out: %2$s, %3$s] fsa: %8$s\n"
 										 ,serviceName, getServerReferenceNo(), getCallerReferenceNo(), 
 										(info.getStbid() == null)?"":info.getStbid(), 
 										(info.getStbip() == null)?"":info.getStbip(), 
 										(info.getDeviceID() == null)?"":info.getDeviceID(), 
 										(info.getExtInfo() == null)?"":info.getExtInfo(), 
-										(info.getFsa() == null)?"":info.getFsa(),
-										(info.getLastBindDate() == null)?"":info.getLastBindDate());
+										(info.getFsa() == null)?"":info.getFsa());
 				}
 			}
 		}

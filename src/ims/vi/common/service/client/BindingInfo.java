@@ -6,24 +6,21 @@ public class BindingInfo {
 	private String deviceID;
 	private String extInfo;
 	private String fsa;
-	private String lastBindDate;
 
 	public BindingInfo(){
 		this.stbid = null;
 		this.stbip = null;
 		this.deviceID = null;
 		this.extInfo = null;
-		this.fsa = null;
-		this.lastBindDate = null;
+		this.fsa = null;		
 	}
 	
-	public BindingInfo(String stbid, String stbip, String deviceID, String extInfo, String fsa, String lastBindDate){
+	public BindingInfo(String stbid, String stbip, String deviceID, String extInfo, String fsa){
 		this.stbid = stbid;
 		this.stbip = stbip;
 		this.deviceID = deviceID;
 		this.extInfo = extInfo;
 		this.fsa = fsa;
-		this.lastBindDate = lastBindDate;
 	}
 	
 	public String getStbid() {
@@ -56,22 +53,15 @@ public class BindingInfo {
 	public void setFsa(String fsa) {
 		this.fsa = fsa;
 	}
-	public String getLastBindDate() {
-		return lastBindDate;
-	}
-	public void setLastBindDate(String lastBindDate) {
-		this.lastBindDate = lastBindDate;
-	}
 	
 	@Override
 	public String toString(){
-		return String.format("%s,stbid=[%s], stbip=[%s], deviceID=[%s], extInfo=[%s], fsa=[%s], lastBindDate=[%s]", 
+		return String.format("%s,stbid=[%s], stbip=[%s], deviceID=[%s], extInfo=[%s], fsa=[%s]", 
 				super.toString(), 
 				(getStbid()==null)?"":getStbid(), 
 				(getStbip()==null)?"":getStbip(), 
 				(getDeviceID()==null)?"":getDeviceID(), 
 				(getExtInfo()==null)?"":getExtInfo(), 
-				(getFsa()==null)?"":getFsa(), 
-				(getLastBindDate()==null)?"":getLastBindDate());
+				(getFsa()==null)?"":getFsa());
 	}
 }

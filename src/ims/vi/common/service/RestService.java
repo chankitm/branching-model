@@ -2,7 +2,6 @@ package ims.vi.common.service;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -30,7 +29,6 @@ import ims.vi.common.service.client.BindingInfo;
 import ims.vi.common.service.client.CashPointTopUpPlan;
 import ims.vi.common.service.client.FSA;
 import ims.vi.common.service.client.STBINFO;
-import ims.vi.common.service.client.GetCurrentBindingInfoResponse;
 import ims.vi.common.service.client.enums.MovieHouseResponseCode;
 import ims.vi.common.service.client.enums.RestServerResponseCode;
 
@@ -122,28 +120,7 @@ public class RestService {
 		classMap.put("bindingInfo", BindingInfo.class);
 		APIResponse jsonResponseObj = (APIResponse) JSONObject.toBean(JSONObject.fromObject(jsonResponse), request.getResponseClass(), classMap);
 		
-		//temp bug fix, for JSON in JSON
-		if("class ims.vi.common.service.client.GetCurrentBindingInfoResponse".contentEquals(jsonResponseObj.getClass().toString())){
-			jsonResponseObj = trim((GetCurrentBindingInfoResponse) jsonResponseObj);
-		}
-		
 		logger.info(String.format("[%s: %s] End:\n%s", serviceName, request.getCallerReferenceNo(), jsonResponseObj.toString(serviceName)));
 		return jsonResponseObj;
-	}
-	
-	private static GetCurrentBindingInfoResponse trim(GetCurrentBindingInfoResponse res){
-		if(res == null) return null;
-		List<BindingInfo> list = res.getBindingInfo();
-		if(list == null) return res;
-		if(list.get(0)==null) return res;
-		
-		for(BindingInfo info:list){
-			String lastChar = info.getExtInfo().substring(info.getExtInfo().length()-1, info.getExtInfo().length());
-			if(" ".contentEquals(lastChar)){
-				info.setExtInfo(info.getExtInfo().substring(0, info.getExtInfo().length()-1));
-			}
-		}
-		
-		return res;
 	}
 }
